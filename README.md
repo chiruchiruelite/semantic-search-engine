@@ -59,7 +59,7 @@ The notebook automatically downloads the **MS MARCO** dataset via the `datasets`
 
 ## 3. Usage & Reproducibility
 
-To reproduce the results reported below, follow these steps. All random seeds are fixed to `42`.
+To reproduce the results reported below, follow these steps. All random seeds are fixed to `67`.
 
 ### A. Training & Indexing
 
@@ -97,19 +97,19 @@ A. Retrieval Quality Metrics
 
 | System Configuration | MRR (Rank-1) | Recall@10 | Precision@10 | NDCG@10 |
 | --- | --- | --- | --- | --- |
-| **Baseline** (Pre-trained) | 0.4270 | 0.8700 | 0.0870 | 0.5320 |
-| **Fine-Tuned** (Bi-Encoder) | 0.4296 | 0.8500 | 0.0850 | 0.5297 |
-| **Hybrid** (RRF Fusion) | 0.4136 | 0.8400 | 0.0840 | 0.4763 |
-| **Re-Ranker** (Cross-Encoder) | **0.5261**  | **0.9200** | **0.0920** | **0.6105** |
+| **Baseline** (Pre-trained) | 0.4270 | 0.8700 | 0.0870 | 0.5317 |
+| **Fine-Tuned** (Bi-Encoder) | 0.4296 | 0.8500 | 0.0850 | 0.5292 |
+| **Hybrid** (RRF Fusion) | 0.4050 | 0.8400 | 0.0800 | 0.4784 |
+| **Re-Ranker** (Cross-Encoder) | **0.5261**  | **0.9200** | **0.0920** | **0.6209** |
 
 B. Efficiency Analysis 
 
 | Metric | Measurement | Notes |
 | --- | --- | --- |
-| **Latency (p95)** | **~68.50 ms** | Includes End-to-End processing. |
+| **Latency (p95)** | **~115.24 ms** | Includes End-to-End processing. |
 | **Dense Index Memory** | **~73.24 MB** | FAISS Flat Index (Float32). |
-| **BM25 Index Memory** | **~45.33 MB** | Inverted Index (Tokenized). |
-| **Total Memory** | **~118.57 MB** | Lightweight, suitable for edge deployment. |
+| **BM25 Index Memory** | **~7.58 MB** | Inverted Index (Tokenized). |
+| **Total Memory** | **~80.82 MB** | Lightweight, suitable for edge deployment. |
 
 ---
 
