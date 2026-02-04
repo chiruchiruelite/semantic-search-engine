@@ -5,17 +5,14 @@ This submission implements an end-to-end Neural Information Retrieval system tra
 
 ### Key Features
 
-* 
-**Dense Retrieval:** Fine-tuned `all-MiniLM-L6-v2` using **Contrastive Learning** with **Hard Negatives**.
+* **Dense Retrieval:** Fine-tuned `all-MiniLM-L6-v2` using **Contrastive Learning** with **Hard Negatives**.
 
 
 * **Advanced Training:** Implemented **Matryoshka Representation Learning (MRL)** to maintain performance at varying vector dimensions.
-* 
-**Hybrid Search:** Combines semantic vectors with **BM25** using **Reciprocal Rank Fusion (RRF)**.
+* **Hybrid Search:** Combines semantic vectors with **BM25** using **Reciprocal Rank Fusion (RRF)**.
 
 
-* 
-**Re-Ranking (Bonus):** A second-stage **Cross-Encoder** (`ms-marco-MiniLM-L-6-v2`) re-scores top candidates for maximum accuracy.
+* **Re-Ranking :** A second-stage **Cross-Encoder** (`ms-marco-MiniLM-L-6-v2`) re-scores top candidates for maximum accuracy.
 
 
 * **Interactive UI:** A real-time web interface (Gradio) for qualitative testing.
@@ -68,8 +65,7 @@ Run the main notebook `semantic_search_engine.ipynb`. The pipeline executes in 4
 
 1. **Data Prep:** Loads MS MARCO (validation subset).
 2. **Fine-Tuning:** Trains the Bi-Encoder using `MultipleNegativesRankingLoss` + `MatryoshkaLoss`.
-3. 
-**Indexing:** Builds a **FAISS** Index (`IndexFlatIP`) for sub-50ms retrieval.
+3. **Indexing:** Builds a **FAISS** Index (`IndexFlatIP`) for sub-50ms retrieval.
 
 
 4. **Evaluation:** Runs benchmarks on 100+ held-out queries.
@@ -115,7 +111,7 @@ B. Efficiency Analysis
 
 ---
 
-5. Critical Analysis & Insights 
+## 5. Critical Analysis & Insights 
 
 ### Insight 1: The "Hybrid Paradox" on MS MARCO
 
@@ -123,8 +119,7 @@ Contrary to standard expectations, our **Hybrid System (Dense + BM25)** performe
 
 * **Root Cause:** MS MARCO is a **semantic** dataset where queries often lack keyword overlap with answers (the "Lexical Gap").
 * **Analysis:** BM25 relies on exact term matching. For queries like *"how to fix a leaky faucet"*, BM25 retrieves documents repeating the word "fix" rather than actual tutorials. This introduces **"lexical noise"** into the candidate pool, diluting the high-quality semantic candidates found by the Bi-Encoder.
-* 
-**Conclusion:** While Hybrid is essential for domain-specific jargon (e.g., part numbers), for open-domain QA, **Pure Dense Retrieval** is superior.
+* **Conclusion:** While Hybrid is essential for domain-specific jargon (e.g., part numbers), for open-domain QA, **Pure Dense Retrieval** is superior.
 
 
 
@@ -141,8 +136,7 @@ Implementing the **Two-Stage Re-Ranking** pipeline provided the single largest p
 
 We utilized **Hard Negative Mining** (sampling negatives from the top-50 results of the baseline) rather than random negatives.
 
-* 
-**Impact:** This forced the model to distinguish between "somewhat relevant" and "truly relevant" documents, preventing the **Catastrophic Forgetting** we observed in earlier experiments with random negatives.
+* **Impact:** This forced the model to distinguish between "somewhat relevant" and "truly relevant" documents, preventing the **Catastrophic Forgetting** we observed in earlier experiments with random negatives.
 
 
 
@@ -158,16 +152,3 @@ We utilized **Hard Negative Mining** (sampling negatives from the top-50 results
 └── app.py                        # (Optional) Standalone Streamlit App
 
 ```
-
-## References
-
-* 
-**Dataset:** [MS MARCO Passage Ranking](https://microsoft.github.io/msmarco/) 
-
-
-* 
-**Methodology:** [Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks](https://arxiv.org/abs/1908.10084) 
-
-
-* 
-**Fusion:** [Reciprocal Rank Fusion (Cormack et al., 2009)](https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf)
