@@ -46,6 +46,8 @@ pip install -r requirements.txt
 
 ```
 
+3. Or just change the link from github.com to githubtocolab.com and click 'Run All' in the notebook
+
 
 *(See `requirements.txt` for exact versions: `sentence-transformers==3.0.1`, `faiss-cpu==1.8.0`, etc.)*
 3. Download Data:
