@@ -1,0 +1,16 @@
+{
+    "seed": 67,
+    "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+    "dataset_name": "ms_marco",
+    "dataset_subset": "v1.1",
+    "dataset_size": 50000,
+    "train_samples": 10000,
+    "batch_size": 16,
+    "num_epochs": 1,
+    "hybrid_alpha": 0.5,
+    "top_k": 10,
+    "bm25_k1": 1.2,
+    "bm25_b": 0.3,
+    "w_dense": 1.0,
+    "w_sparse": 0.3
+}
